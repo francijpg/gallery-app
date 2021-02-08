@@ -5,6 +5,8 @@ Gallery app is a way to manage and share content through images with others, lik
 3. Navigate with an infinite scroll through all the content.
 4. Recover your password, in case you forget it.
 
+![DEMO](https://github.com/francijpg/gallery-app/blob/master/src/assets/images/gallery-app.gif)
+
 ## Features
 - Built with React 17
 - Powered by Firebase services (authentication, firestore, storage) 
