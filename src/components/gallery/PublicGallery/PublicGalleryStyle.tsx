@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import image1 from "../../../assets/images/image1.jpg";
 
 export const showIn = keyframes`
 from {
@@ -27,4 +28,16 @@ export const StyledHeadingWrapper = styled.div`
   width: 100%;
   max-width: 1350px;
   padding: 10px;
+`;
+
+export const StyledBackground = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: url(${image1});
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
 `;

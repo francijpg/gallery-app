@@ -24,13 +24,6 @@ export const StyledWrapper = styled.div`
   animation: ${showIn} 1s linear forwards;
 `;
 
-export const StyledHeading = styled.h2`
-  margin: 20px;
-  color: white;
-  font-size: 2rem;
-  text-transform: capitalize;
-`;
-
 export const StyledBackground = styled.div`
   position: fixed;
   top: 0;

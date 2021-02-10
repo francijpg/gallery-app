@@ -6,7 +6,6 @@ import { getImagesApi } from "../../../redux/thunks/Unsplash";
 import {
   StyledWrapper,
   StyledBackground,
-  StyledHeading,
 } from "./PictureViewStyle";
 import util from "../../../utils";
 
@@ -14,6 +13,7 @@ import SearchBar from "../SearchBar";
 import PictureList from "../PictureList";
 import LoadingSpinner from "../../common/LoadingSpinner";
 import Message from "../../common/Message";
+import Title from "../../common/Title";
 
 type Props = {
   location: {
@@ -100,7 +100,7 @@ const PictureView: FC<Props> = ({ location }) => {
   return (
     <StyledWrapper data-testid="results-view">
       <SearchBar />
-      <StyledHeading>{searchTerm}</StyledHeading>
+      <Title as="h2" align="center" color="white">{searchTerm}</Title>
       {isError && (
         <Message
           msg="Connection failed or Something went wrong... Please try again later."

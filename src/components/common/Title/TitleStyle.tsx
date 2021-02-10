@@ -19,6 +19,7 @@ const H1Styles = css`
 const H2Styles = css`
   font-size: 2rem;
   font-weight: bold;
+  text-transform: capitalize;
   ${headingStyle}
 `;
 
