@@ -1,4 +1,4 @@
-import { SET_USER, SET_LOADING, SIGN_OUT, SET_ERROR, NEED_VERIFICATION, SET_SUCCESS, ADD_IMAGE, GET_IMAGES, DELETE_IMAGE, SET_IMAGE_ERROR, GET_IMAGES_UNSPLASH, UNSPLASH_ERROR, PRIVATE_IMAGE, GET_USER_IMAGES } from "../constants/actionTypes";
+import { SET_USER, SET_LOADING, SIGN_OUT, SET_ERROR, NEED_VERIFICATION, SET_SUCCESS, ADD_IMAGE, GET_IMAGES, DELETE_IMAGE, SET_IMAGE_ERROR, GET_IMAGES_UNSPLASH, UNSPLASH_ERROR, PRIVATE_IMAGE } from "../constants/actionTypes";
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '../redux/store';
 import { GalleryImage } from "./gallery";
@@ -62,11 +62,6 @@ interface PrivateImageAction {
   payload: GalleryImage[];
 }
 
-interface GetUserImagesAction {
-  type: typeof GET_USER_IMAGES;
-  payload: GalleryImage[];
-}
-
 // Unsplash
 interface GetImagesApiAction {
   type: typeof GET_IMAGES_UNSPLASH;
@@ -80,7 +75,7 @@ interface SetUnsplashErrorAction {
 
 // Types
 export type AuthAction = SetUserAction | SetLoadingAction | SignOutAction | SetErrorAction | NeedVerificationAction | SetSuccessAction;
-export type GalleryAction = AddImageAction | GetImagesAction | DeleteImageAction | SetImageErrorAction | PrivateImageAction | GetUserImagesAction;
+export type GalleryAction = AddImageAction | GetImagesAction | DeleteImageAction | SetImageErrorAction | PrivateImageAction;
 export type UnsplashAction = GetImagesApiAction | SetUnsplashErrorAction;
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,

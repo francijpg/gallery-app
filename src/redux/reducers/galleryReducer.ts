@@ -1,4 +1,4 @@
-import { GET_IMAGES, ADD_IMAGE, DELETE_IMAGE, SET_IMAGE_ERROR, PRIVATE_IMAGE, GET_USER_IMAGES } from '../../constants/actionTypes';
+import { GET_IMAGES, ADD_IMAGE, DELETE_IMAGE, SET_IMAGE_ERROR, PRIVATE_IMAGE } from '../../constants/actionTypes';
 import { GalleryState } from '../../types/gallery';
 import { GalleryAction } from '../../types/types';
 
@@ -19,12 +19,12 @@ const galleryReducer = (state = initialState, action: GalleryAction) => {
       return {
         ...state,
         images: action.payload,
-        imagesLoaded: true
+        imagesLoaded: true,
       }
     case DELETE_IMAGE:
       return {
         ...state,
-        images: action.payload
+        images: action.payload,
       }
     case SET_IMAGE_ERROR:
       return {
@@ -36,12 +36,6 @@ const galleryReducer = (state = initialState, action: GalleryAction) => {
         ...state,
         images: action.payload,
         imagesPrivates: true
-      }
-    case GET_USER_IMAGES:
-      return {
-        ...state,
-        images: action.payload,
-        imagesLoaded: true
       }
     default:
       return state;

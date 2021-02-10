@@ -3,39 +3,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 
 import { GalleryImage } from "../../../types/gallery";
-import { StyledWrapper, StyledHeadingWrapper } from "./UserGalleryStyle";
+import { StyledBackground, StyledHeadingWrapper, StyledWrapper } from "../PublicGallery/PublicGalleryStyle";
 
 import Title from "../../common/Title";
 import UserGalleryList from "./UserGalleryList";
 
-import { getUserImages } from "../../../redux/thunks/Gallery";
+import { getImages } from "../../../redux/thunks/Gallery";
 import { setSuccess } from "../../../redux/actions/authActions";
 import Message from "../../common/Message";
 
 const UserGallery: FC = () => {
   const { user, needVerification, success } = useSelector((state: RootState) => state.auth);
-  const { images } = useSelector((state: RootState) => state.gallery);
+  const { images, imagesLoaded, imagesPrivates } = useSelector((state: RootState) => state.gallery);
   const [userImages, setUserImages] = useState<GalleryImage[]>([]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const id = user?.id;
-    dispatch(getUserImages(id));
-    // eslint-disable-next-line
+    if(!imagesLoaded) {
+      dispatch(getImages());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (images.length > 0) {
-      const filtered = images.filter(
-        (i: GalleryImage) => i.uploaderId === user?.id
-      );
+      let filtered: GalleryImage[] = []
+      filtered = images.filter(i => i.uploaderId === user?.id)
       setUserImages(filtered);
     } else {
       setUserImages([]);
     }
     // eslint-disable-next-line
-  }, [images]);
+  }, [images, imagesPrivates]);
 
   useEffect(() => {
     if (success) {
@@ -51,7 +51,8 @@ const UserGallery: FC = () => {
           <Message type="info" msg="Please verify your email address." />
         )}
       </StyledHeadingWrapper>
-      <UserGalleryList imagesArray={userImages} />
+      <UserGalleryList publicImages={images} imagesArray={userImages} />
+      <StyledBackground />
     </StyledWrapper>
   );
 };

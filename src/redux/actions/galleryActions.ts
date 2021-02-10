@@ -1,6 +1,6 @@
 import { GalleryImage } from '../../types/gallery';
 import { GalleryAction } from '../../types/types';
-import { GET_IMAGES, ADD_IMAGE, DELETE_IMAGE, SET_IMAGE_ERROR, PRIVATE_IMAGE, GET_USER_IMAGES } from "../../constants/actionTypes";
+import { GET_IMAGES, ADD_IMAGE, DELETE_IMAGE, SET_IMAGE_ERROR, PRIVATE_IMAGE } from "../../constants/actionTypes";
 
 export const getImagesAction = (arr: GalleryImage[]): GalleryAction => ({
   type: GET_IMAGES,
@@ -22,12 +22,7 @@ export const setImageError = (msg: string): GalleryAction => ({
   payload: msg
 })
 
-export const privateImageAction = (arr: GalleryImage[]): GalleryAction => ({
+export const privateImageAction = (images: GalleryImage[]): GalleryAction => ({
   type: PRIVATE_IMAGE,
-  payload: arr
-})
-
-export const getUserImagesAction = (images: GalleryImage[]): GalleryAction => ({
-  type: GET_USER_IMAGES,
   payload: images
 })

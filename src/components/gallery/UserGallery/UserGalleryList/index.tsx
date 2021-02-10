@@ -8,10 +8,11 @@ import GalleryModal from "../GalleryModal";
 import { StyledListWrapper } from "./UserGalleryListStyle";
 
 type Props = {
+  publicImages: GalleryImage[];
   imagesArray: GalleryImage[];
 };
 
-const UserGalleryList: FC<Props> = ({ imagesArray }) => {
+const UserGalleryList: FC<Props> = ({ publicImages, imagesArray }) => {
   const [modalData, setModalData] = useState<GalleryImage | null>(null);
 
   const [showDeleteImageAlert, setShowDeleteImageAlert] = useState(false);
@@ -35,8 +36,8 @@ const UserGalleryList: FC<Props> = ({ imagesArray }) => {
     />
   ));
 
-  const handlePrivacity = (userArr: GalleryImage[], image: GalleryImage) => {
-    dispatch(privateImage(userArr, image));
+  const handlePrivacity = (image: GalleryImage) => {
+    dispatch(privateImage(publicImages, image));
   };
 
   const handleDelete = (image: GalleryImage) => {
@@ -48,7 +49,7 @@ const UserGalleryList: FC<Props> = ({ imagesArray }) => {
     if (selectedImage) {
       setDeleting(true);
       dispatch(
-        deleteImage(imagesArray, selectedImage, () => {
+        deleteImage(publicImages, selectedImage, () => {
           setModalData(null);
           setDeleting(false);
           setShowDeleteImageAlert(false);
@@ -63,7 +64,7 @@ const UserGalleryList: FC<Props> = ({ imagesArray }) => {
       {modalData && (
         <GalleryModal
           imageData={modalData}
-          userImages={imagesArray}
+          userImages={imagesArray}//To add pagination in the future
           closeModal={handleCloseModal}
           hideImage={handlePrivacity}
           deleteImage={handleDelete}

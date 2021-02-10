@@ -11,7 +11,7 @@ import {
 type Props = {
   imageData: GalleryImage;
   closeModal: () => void;
-  hideImage: (userImages: GalleryImage[], imageData: GalleryImage) => void;
+  hideImage: (imageData: GalleryImage) => void;
   userImages: GalleryImage[];
   deleteImage: (imageData: GalleryImage) => void;
 };
@@ -22,7 +22,7 @@ const GalleryModal: FC<Props> = ({ imageData, closeModal, hideImage, userImages,
   return (
     <ModalImage url={imageUrl} alt={uploaderName} closeModal={closeModal}>
       <StyledImageContainer>
-        <ButtonIcon clicked={() => hideImage(userImages, imageData)}>
+        <ButtonIcon clicked={() => hideImage(imageData)}>
           <StyledIconHideImage />
         </ButtonIcon>
         <ButtonIcon clicked={() => deleteImage(imageData)}>
