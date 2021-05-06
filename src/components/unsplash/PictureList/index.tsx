@@ -3,21 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useHistory } from "react-router-dom";
 
-import { ImageAPI } from "../../../types/unsplash";
-import PictureModal from "../PictureModal";
-
-import { StyledListWrapper } from "./PictureListStyle";
-import util from "../../../utils";
-import { addOneImage } from "../../../redux/thunks/Gallery";
 import Message from "../../common/Message";
 import CardImage from "../../common/CardImage";
+import PictureModal from "../PictureModal";
+
+import { ImageAPI } from "../../../types/unsplash";
+import { StyledListWrapper } from "./PictureListStyle";
+
+import util from "../../../utils";
+import { addOneImage } from "../../../redux/thunks/Gallery";
+
 
 type Props = {
   picturesArray: ImageAPI[];
 };
 
 const PictureList: FC<Props> = ({ picturesArray }) => {
-  const _isMounted = useRef(true);
+  const isMounted = useRef(true); // mutable reference
   const [modalData, setModalData] = useState<ImageAPI | null>(null);
   const [modalPictureIndex, setModalPictureIndex] = useState<number>(0);
   const [isModalError, setIsModalError] = useState<boolean>(false);
@@ -30,7 +32,7 @@ const PictureList: FC<Props> = ({ picturesArray }) => {
 
   useEffect(() => {
     return () => {
-      _isMounted.current = false; // ComponentWillUnmount in Class Component
+      isMounted.current = false;
     };
   }, []);
 
@@ -48,7 +50,7 @@ const PictureList: FC<Props> = ({ picturesArray }) => {
 
   const handleSaveModalPicture = async (picture: ImageAPI) => {
     const fileFormat = await dataUrlToFile(picture.urls.regular, picture.id);
-    if (fileFormat && user && _isMounted.current) {
+    if (fileFormat && user && isMounted.current) {
       dispatch(addOneImage(fileFormat, user));
       history.push("/dashboard");
     }
