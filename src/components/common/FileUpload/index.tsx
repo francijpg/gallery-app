@@ -7,11 +7,12 @@ interface FileUploadProps {
 }
 
 const FileUpload: FC<FileUploadProps> = ({ onChange }) => {
-  const fileInput = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const pickImageButtonClickHandler = () => {
-    if (fileInput.current) {
-      fileInput.current.click();
+    const input = fileInputRef.current;
+    if (input) {
+      input.click();
     }
   };
 
@@ -22,7 +23,7 @@ const FileUpload: FC<FileUploadProps> = ({ onChange }) => {
         name="files"
         onChange={onChange}
         multiple
-        ref={fileInput}
+        ref={fileInputRef}
         hidden
       />
       <Button
